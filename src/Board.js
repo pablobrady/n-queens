@@ -168,13 +168,14 @@
     hasMinorDiagonalConflictAt: function(colIndex) {
       var counter = 0;
       var n = this.get('n');
-      for(i = 0; i < n; i++, colIndex--) {
-        if (!this.get(i)[colIndex]){
+      for(var i = 0; i < n; i++ ) {
+        if (this.get(i)[colIndex]){
           counter += this.get(i)[colIndex];
           if (counter > 1) {
             return true;
           }
         }
+        colIndex--;
       }
 
       return false;
