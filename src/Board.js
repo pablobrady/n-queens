@@ -107,7 +107,7 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      
+
     },
 
     // test if any columns on this board contain conflicts
@@ -134,15 +134,49 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+    hasMajorDiagonalConflictAt: function(colIndex) {
+      var counter = 0;
+      var n = this.get('n');
+      for(i = 0; i < n; i++) {
+        if (this.get(i)[colIndex] !== undefined){
+          counter += this.get(i)[colIndex];
+          if (counter > 1) {
+            return true;
+          }
+        }
+        colIndex++;
+      }
 
+      return false;
     },
 
-    // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var n = this.get('n');
+      for (var i = -n + 1; i < (n-1); i++) {
+        var checkDiagnal = this.hasMajorDiagonalConflictAt(i);
+        if (checkDiagnal) {
+          return true;
+        }
+      } 
+      return false;
     },
 
+      // var checkNextDiag = function(index, counter) {
+        
+      //   var counter = 0;
+      //   if (index === 0 ) {
+      //     counter += 
+      //   }
+      //   return counter;
+      // checkNextDiag(index + n+1);
+      // }
+
+
+
+      // for (var x = 0; x < n*2; x++) {
+      //   counter += checkNextDiag(x);
+      // };
+      // return false;
 
 
     // Minor Diagonals - go from top-right to bottom-left
